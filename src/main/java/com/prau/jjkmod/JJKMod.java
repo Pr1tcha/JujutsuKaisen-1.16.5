@@ -1,5 +1,7 @@
 package com.prau.jjkmod;
 
+import com.prau.jjkmod.entity.client.renderer.GojoSchoolSuitRenderer;
+import com.prau.jjkmod.item.GojoSchoolSuitItem;
 import com.prau.jjkmod.item.YutaSuitItem;
 import com.prau.jjkmod.init.ModItems;
 import com.prau.jjkmod.entity.client.renderer.YutaSuitRenderer;
@@ -9,6 +11,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +24,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
+import net.minecraft.item.Items;
 
 import java.util.stream.Collectors;
 
@@ -32,19 +36,15 @@ public class JJKMod
     public static final ItemGroup MAIN_TAB = (new ItemGroup("jjk_tab") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.YUTA_HELMET.get());}
+            return new ItemStack(Items.COOKIE);}
     });
     private static final Logger LOGGER = LogManager.getLogger();
 
     public JJKMod() {
         // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.ITEMS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -95,6 +95,7 @@ public class JJKMod
     @SubscribeEvent
     public static void registerArmorRenderers(final FMLClientSetupEvent event) {
         GeoArmorRenderer.registerArmorRenderer(YutaSuitItem.class, YutaSuitRenderer::new);
+        GeoArmorRenderer.registerArmorRenderer(GojoSchoolSuitItem.class, GojoSchoolSuitRenderer::new);
     }
 
 }

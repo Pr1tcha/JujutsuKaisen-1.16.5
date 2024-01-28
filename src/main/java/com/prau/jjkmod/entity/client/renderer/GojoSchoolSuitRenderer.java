@@ -1,14 +1,16 @@
 package com.prau.jjkmod.entity.client.renderer;
 
+import com.prau.jjkmod.entity.client.armor.GojoSchoolSuitModel;
 import com.prau.jjkmod.entity.client.armor.YutaSuitModel;
+import com.prau.jjkmod.item.GojoSchoolSuitItem;
 import com.prau.jjkmod.item.YutaSuitItem;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-public class YutaSuitRenderer extends GeoArmorRenderer<YutaSuitItem> {
-	public YutaSuitRenderer() {
-		super(new YutaSuitModel());
+public class GojoSchoolSuitRenderer extends GeoArmorRenderer<GojoSchoolSuitItem> {
+	public GojoSchoolSuitRenderer() {
+		super(new GojoSchoolSuitModel());
 
+		this.headBone = "armorHead";
 		this.bodyBone = "armorBody";
 		this.rightArmBone = "armorRightArm";
 		this.leftArmBone = "armorLeftArm";
