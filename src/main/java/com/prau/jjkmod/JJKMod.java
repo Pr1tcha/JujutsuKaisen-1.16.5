@@ -1,7 +1,12 @@
 package com.prau.jjkmod;
 
+import com.prau.jjkmod.item.YutaSuitItem;
+import com.prau.jjkmod.init.ModItems;
+import com.prau.jjkmod.entity.client.renderer.YutaSuitRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +20,7 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 import java.util.stream.Collectors;
 
@@ -23,7 +29,11 @@ import java.util.stream.Collectors;
 public class JJKMod
 {
     public static final String MOD_ID = "jjkmod";
-    // Directly reference a log4j logger.
+    public static final ItemGroup MAIN_TAB = (new ItemGroup("jjk_tab") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ModItems.YUTA_HELMET.get());}
+    });
     private static final Logger LOGGER = LogManager.getLogger();
 
     public JJKMod() {
@@ -46,9 +56,9 @@ public class JJKMod
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
-
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
+
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
     }
 
@@ -82,4 +92,9 @@ public class JJKMod
             LOGGER.info("HELLO from Register Block");
         }
     }
+    @SubscribeEvent
+    public static void registerArmorRenderers(final FMLClientSetupEvent event) {
+        GeoArmorRenderer.registerArmorRenderer(YutaSuitItem.class, YutaSuitRenderer::new);
+    }
+
 }

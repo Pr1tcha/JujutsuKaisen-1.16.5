@@ -1,4 +1,4 @@
-package com.prau.jjkmod.item;
+package com.prau.jjkmod.init;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
