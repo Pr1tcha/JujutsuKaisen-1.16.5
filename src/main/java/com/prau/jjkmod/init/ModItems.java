@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, JJKMod.MOD_ID);
-    public static final RegistryObject<YutaSuitItem> YUTA_BODY = ITEMS.register("yuta_body",
+    public static final RegistryObject<YutaSuitItem> YUTA_CHEST = ITEMS.register("yuta_chest",
             () -> new YutaSuitItem(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST,
                     new Item.Properties().tab(JJKMod.MAIN_TAB)));
     public static final RegistryObject<YutaSuitItem> YUTA_LEGGINS = ITEMS.register("yuta_leggins",
